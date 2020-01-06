@@ -18,7 +18,7 @@ public class MiktarlariGetirGorev  extends AsyncTask<Object, Object, Cursor>{
     @Override
     protected Cursor doInBackground(Object... params){
         veriTabani.open();
-        return veriTabani.turleriGetir();
+        return veriTabani.urunmiktarlariniGetir();
     }
 
     @Override

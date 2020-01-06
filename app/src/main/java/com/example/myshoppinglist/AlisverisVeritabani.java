@@ -202,6 +202,21 @@ public class AlisverisVeritabani {
                     "miktar integer,miktar_birimi TEXT);";
             db.execSQL(sqlFavoriUrun);
 
+            CREATE TABLE "Favori" (
+                    "_id"	integer PRIMARY KEY AUTOINCREMENT,
+            "ad"	TEXT,
+                    "favori"	integer DEFAULT '0,1',
+                    "fiyat"	REAL,
+                    "tur"	TEXT,
+                    "miktar"	integer,
+                    "miktar_birimi"	TEXT
+)
+            String sqlBirim = "CREATE TABLE Birim" +
+                    "(_id	INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "Birim	INTEGER NOT NULL);";
+            db.execSQL(sqlBirim);
+)
+
 
 
             String sqlTur = "CREATE TABLE tur" +

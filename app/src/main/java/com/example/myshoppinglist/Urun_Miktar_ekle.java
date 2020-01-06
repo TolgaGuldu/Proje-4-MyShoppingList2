@@ -30,7 +30,7 @@ public class Urun_Miktar_ekle extends Fragment{
         @Override
         protected Object doInBackground(Object... params){
             AlisverisVeritabani veriTabani = new AlisverisVeritabani(context);
-            veriTabani.Urun_Miktar_ekle(Integer.parseInt(Miktar.getText().toString());
+            veriTabani.Urun_Miktar_ekle(Integer.parseInt(Miktar.getText().toString()));
             return null;
         }
 
