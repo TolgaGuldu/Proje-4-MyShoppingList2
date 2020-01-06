@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="632.0">com.example.myshoppinglist.Alisveris_Listesi_degistir_sil</node>
+    <node x="301.0" y="632.0">com.example.myshoppinglist.Alisveris_Listesi</node>
+    <node x="272.0" y="0.0">com.example.myshoppinglist.Urun_Ekle</node>
+    <node x="0.0" y="912.0">com.example.myshoppinglist.tur_ekle</node>
+    <node x="733.0" y="772.0">com.example.myshoppinglist.Tur_Listesi</node>
+    <node x="211.0" y="912.0">com.example.myshoppinglist.AlisverisVeritabani</node>
+    <node x="544.0" y="0.0">com.example.myshoppinglist.AnaEkran</node>
+    <node x="248.0" y="772.0">com.example.myshoppinglist.Alisveris_Listesi_ekle</node>
+    <node x="0.0" y="772.0">com.example.myshoppinglist.Urun_Miktar_Listesi</node>
+    <node x="507.0" y="316.0">com.example.myshoppinglist.Urun_Miktar_ekle</node>
+    <node x="493.0" y="772.0">com.example.myshoppinglist.Urun_Listesi</node>
+    <node x="0.0" y="0.0">com.example.myshoppinglist.Urun_degistir_sil</node>
+    <node x="590.0" y="632.0">com.example.myshoppinglist.Favori_Urun_listesi</node>
+    <node x="0.0" y="316.0">com.example.myshoppinglist.Favori_Urun_Degistir_Sil</node>
+    <node x="259.0" y="316.0">com.example.myshoppinglist.Favori_Urun_Ekle</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="305.0" y="721.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

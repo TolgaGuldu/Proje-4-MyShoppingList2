@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">My Shopping List</string>
+    <string name="Alisveris_Listesi">Alışveriş Listesi</string>
+    <string name="Alisveris_Listesi_ekle">Alışveris Ekle</string>
+    <string name="Favori_Urun_listesi">Favori Ürun Listesi</string>
+    <string name="Favori_Urun_Ekle">Favori Ürun Ekle</string>
+    <string name="Urun_Listesi">Ürün Listesi</string>
+    <string name="Urun_Ekle">Ürün Ekle</string>
+    <string name="Urun_Miktar_ekle">Ürün Miktar Ekle</string>
+    <string name="Urun_Miktar_Listesi">Ürün Miktar Listesi</string>
+    <string name="tur_ekle">Tür Ekle</string>
+    <string name="Tur_Listesi">Tür Listesi</string>
+    <string name="Miktar_Birimi">Miktar Birimi Listesi</string>
+    <string name="Miktar_Birimi_Ekle">Miktar Birimi Ekle</string>
+    <string name="list_name">Ad</string>
+    <string name="product_name">Ad</string>
+    <string name="product_amount">Miktar</string>
+    <string name="product_type">Türü</string>
+    <string name="product_type_name">Tür Adı</string>
+    <string name="product_price">Fiyat</string>
+    <string name="add">Ekle</string>
+    <string name="degisiklikleriKaydet">Değişiklikleri Kaydet</string>
+    <string name="sil">Sil</string>
+    <string name="geriDon">Geri Dön</string>
+</resources>
+

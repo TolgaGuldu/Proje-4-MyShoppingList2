@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myshoppinglist"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Miktar_Birimi_Ekle"></activity>
+        <activity android:name=".Favori_Urun_Degistir_Sil"></activity>
+        <activity android:name=".Favori_Urun_Ekle"></activity>
+        <activity android:name=".Favori_Urun_listesi"></activity>
+        <activity android:name=".Urun_Listesi"></activity>
+        <activity android:name=".Alisveris_Listesi_degistir_sil"></activity>
+        <activity android:name=".Alisveris_Listesi_ekle"></activity>
+        <activity
+            android:name=".AnaEkran"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Urun_Miktar_Listesi" />
+        <activity android:name=".Tur_Listesi" />
+        <activity android:name=".Urun_Miktar_ekle" />
+        <activity android:name=".tur_ekle" />
+        <activity android:name=".Urun_degistir_sil" />
+        <activity android:name=".Urun_Ekle" />
+        <activity android:name=".Alisveris_Listesi" />
+    </application>
+
+</manifest>

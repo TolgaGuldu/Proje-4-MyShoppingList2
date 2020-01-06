@@ -1,0 +1,40 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/Favori"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_name" />
+        <EditText
+            android:id="@+id/ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text" >
+            <requestFocus />
+        </EditText>
+    </TableRow>
+
+    <Button
+        android:id="@+id/degisiklikleriKaydet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/degisiklikleriKaydet" />
+    <Button
+        android:id="@+id/sil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sil" />
+    <Button
+        android:id="@+id/geriDon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/geriDon" />
+</TableLayout>
