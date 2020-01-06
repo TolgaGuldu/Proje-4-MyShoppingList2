@@ -28,11 +28,11 @@ public class Urun_Listesi extends ListFragment {
         int[] gosterimListesi = new int[]{R.id.ad, R.id.eklefiyat};
         UrunAdapter = new SimpleCursorAdapter(this.getActivity(), R.layout.urun_hucre, null, alanListesi, gosterimListesi, 0);
         setListAdapter(UrunAdapter);
-        new FavorileriGetirGorev().execute((Object[]) null);
+        new UrunleriGetirGorev().execute((Object[]) null);
         return favoriListesiView;
     }
 
-    private class FavorileriGetirGorev extends AsyncTask<Object, Object, Cursor> {
+    private class UrunleriGetirGorev extends AsyncTask<Object, Object, Cursor> {
         AlisverisVeritabani veriTabani = new AlisverisVeritabani(context);
 
 

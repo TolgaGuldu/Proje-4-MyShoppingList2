@@ -22,6 +22,7 @@ public class Favori_Urun_Degistir_Sil extends Activity {
     private Spinner urun_turu;
     private EditText urun_fiyati;
     private CheckBox Favori_tick;
+    private CursorAdapter BirimAdapter;
     private CursorAdapter TurAdapter;
     private CursorAdapter MiktarAdapter;
     private Context context;
@@ -57,7 +58,7 @@ public class Favori_Urun_Degistir_Sil extends Activity {
         geriDon.setOnClickListener(geriDonTikla);
         Bundle extras = getIntent().getExtras();
         rowID = extras.getLong("row_id");
-        new FavorileriGetir().execute(rowID);
+        new FavorileriGetirGorev().execute(rowID);
     }
 
     private class FavorileriGetirGorev extends AsyncTask<Long, Object, Cursor> {
@@ -74,29 +75,37 @@ public class Favori_Urun_Degistir_Sil extends Activity {
         protected void onPostExecute(Cursor result) {
             super.onPostExecute(result);
             result.moveToFirst();
-            int adPos = result.getColumnIndex("ad");
-            int surePos = result.getColumnIndex("sure");
-            int yilPos = result.getColumnIndex("yil");
-            int turPos = result.getColumnIndex("tur");
-            int yonetmenPos = result.getColumnIndex("yonetmen");
-            ad.setText(result.getString(adPos));
-            sure.setText("" + result.getInt(surePos));
-            yil.setText("" + result.getInt(yilPos));
-            for (int i = 0; i < turAdapter.getCount(); i++) {
-                Cursor cursor = (Cursor) turAdapter.getItem(i);
+            int urun_adiPos = result.getColumnIndex("urun_adi");
+            int urun_miktariPos = result.getColumnIndex("urun_miktari");
+            int urun_miktari_birimiPos = result.getColumnIndex("urun_miktari_birimi");
+            int urun_turuPos = result.getColumnIndex("urun_turu");
+            int urun_fiyatiPos = result.getColumnIndex("urun_fiyati");
+            urun_adi.setText(result.getString(urun_adiPos));
+            urun_fiyati.setText("" + result.getInt(urun_fiyatiPos));
+            for (int i = 0; i < TurAdapter.getCount(); i++) {
+                Cursor cursor = (Cursor) TurAdapter.getItem(i);
                 String turAdi = cursor.getString(cursor.getColumnIndex("ad"));
-                String sonucTurAdi = result.getString(turPos);
+                String sonucTurAdi = result.getString(urun_turuPos);
                 if (turAdi.equals(sonucTurAdi)) {
-                    tur.setSelection(i);
+                    urun_turu.setSelection(i);
                     break;
                 }
             }
-            for (int i = 0; i < yonetmenAdapter.getCount(); i++) {
-                Cursor cursor = (Cursor) yonetmenAdapter.getItem(i);
-                String yonetmenAdi = cursor.getString(cursor.getColumnIndex("ad")) + " " + cursor.getString(cursor.getColumnIndex("soyad"));
-                String sonucYonetmenAdi = result.getString(yonetmenPos);
-                if (yonetmenAdi.equals(sonucYonetmenAdi)) {
-                    yonetmen.setSelection(i);
+            for (int i = 0; i < MiktarAdapter.getCount(); i++) {
+                Cursor cursor = (Cursor) MiktarAdapter.getItem(i);
+                String miktarAdi = cursor.getString(cursor.getColumnIndex("miktar"));
+                String sonucmiktarAdi= result.getString(urun_miktariPos);
+                if (miktarAdi.equals(sonucmiktarAdi)) {
+                    urun_miktari.setSelection(i);
+                    break;
+                }
+            }
+            for (int i = 0; i < BirimAdapter.getCount(); i++) {
+                Cursor cursor = (Cursor) BirimAdapter.getItem(i);
+                String BirimnAdi = cursor.getString(cursor.getColumnIndex("birim"));
+                String sonucBirimnAdi = result.getString(urun_miktari_birimiPos);
+                if (BirimnAdi.equals(sonucBirimnAdi)) {
+                    urun_miktari_birimi.setSelection(i);
                     break;
                 }
             }
@@ -109,12 +118,14 @@ public class Favori_Urun_Degistir_Sil extends Activity {
         @Override
         protected Object doInBackground(Object... params) {
             AlisverisVeritabani veriTabani = new AlisverisVeritabani(context);
-            Cursor turCursor = (Cursor) turAdapter.getItem(tur.getSelectedItemPosition());
+            Cursor turCursor = (Cursor) TurAdapter.getItem(urun_turu.getSelectedItemPosition());
             String turAdi = turCursor.getString(turCursor.getColumnIndex("ad"));
-            Cursor yonetmenCursor = (Cursor) yonetmenAdapter.getItem(yonetmen.getSelectedItemPosition());
-            String yonetmenAdi = yonetmenCursor.getString(yonetmenCursor.getColumnIndex("ad")) + " " + yonetmenCursor.getString(yonetmenCursor.getColumnIndex("soyad"));
-            veriTabani.filmDegistir(rowID, ad.getText().toString(), Integer.parseInt(sure.getText().toString()),
-                    Integer.parseInt(yil.getText().toString()), turAdi, yonetmenAdi);
+            Cursor miktarCursor = (Cursor) MiktarAdapter.getItem(urun_miktari.getSelectedItemPosition());
+            int miktar = miktarCursor.getInt(miktarCursor.getColumnIndex("urun_miktari"));
+            Cursor birimCursor = (Cursor) BirimAdapter.getItem(urun_miktari_birimi.getSelectedItemPosition());
+            String birim = turCursor.getString(birimCursor.getColumnIndex("birim"));
+            veriTabani.Favori_Urun_degistir(rowID,urun_adi.getText().toString(), Favori_tick.isChecked(),
+                    Integer.parseInt(urun_fiyati.getText().toString()), turAdi, miktar,birim);
             return null;
         }
 
@@ -146,7 +157,7 @@ public class Favori_Urun_Degistir_Sil extends Activity {
 
     public OnClickListener silTikla = new OnClickListener() {
         public void onClick(View v) {
-            filmSilGorev.execute(new Long[]{rowID});
+            favoriSilGorev.execute(new Long[]{rowID});
         }
     };
 

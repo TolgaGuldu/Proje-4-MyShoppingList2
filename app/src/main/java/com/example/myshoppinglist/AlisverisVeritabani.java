@@ -61,10 +61,9 @@ public class AlisverisVeritabani {
         close();
     }
 
-    public void Urun_Miktar_ekle(int Miktar,String Miktar_Birimi) {
+    public void Urun_Miktar_ekle(int Miktar) {
         ContentValues yeniMiktar = new ContentValues();
         yeniMiktar.put("Miktar", Miktar);
-        yeniMiktar.put("Miktar_Birimi", Miktar_Birimi);
         open();
         veriTabani.insert("Miktar", null, yeniMiktar);
         close();
@@ -155,7 +154,7 @@ public class AlisverisVeritabani {
         return veriTabani.query("Liste", new String[] {"_id", "ad"}, null, null, null, null, "ad");
     }
 
-    public Cursor UrunleriGetir(){
+    public Cursor UrunleriGetir(Long param){
         return veriTabani.query("Urun", new String[] {"_id", "ad","Favori","Fiyat","Türü","Miktar","Miktar_Birimi"}, null, null, null, null, "ad");
     }
 

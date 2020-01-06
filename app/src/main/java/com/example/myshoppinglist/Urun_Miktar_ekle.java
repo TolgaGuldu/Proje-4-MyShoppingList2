@@ -11,8 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Urun_Miktar_ekle extends Fragment
-    private EditText Birim;
+public class Urun_Miktar_ekle extends Fragment{
+    private EditText Miktar;
     private Context context;
 
     @Override
@@ -20,7 +20,7 @@ public class Urun_Miktar_ekle extends Fragment
                              Bundle savedInstanceState) {
         View yonetmenEkleView = inflater.inflate(R.layout.activity_urun__miktar_ekle, container, false);
         context = this.getActivity();
-        Birim = (EditText) yonetmenEkleView.findViewById(R.id.ekleYonetmenAd);
+        Miktar = (EditText) yonetmenEkleView.findViewById(R.id.ekleYonetmenAd);
         Button ekle = (Button) yonetmenEkleView.findViewById(R.id.yonetmenEkle);
         ekle.setOnClickListener(ekleTikla);
         return yonetmenEkleView;
@@ -30,7 +30,7 @@ public class Urun_Miktar_ekle extends Fragment
         @Override
         protected Object doInBackground(Object... params){
             AlisverisVeritabani veriTabani = new AlisverisVeritabani(context);
-            veriTabani.Urun_Miktar_ekle(Birim.getText().toString());
+            veriTabani.Urun_Miktar_ekle(Integer.parseInt(Miktar.getText().toString());
             return null;
         }
 

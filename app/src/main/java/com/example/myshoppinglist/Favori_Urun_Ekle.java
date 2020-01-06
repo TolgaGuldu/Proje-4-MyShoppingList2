@@ -71,10 +71,10 @@ public class Favori_Urun_Ekle extends Fragment {
             Cursor turCursor = (Cursor) TurAdapter.getItem(urun_turu.getSelectedItemPosition());
             String turAdi = turCursor.getString(turCursor.getColumnIndex("ad"));
             Cursor miktarCursor = (Cursor) MiktarAdapter.getItem(urun_miktari.getSelectedItemPosition());
-            String miktar = miktarCursor.getString(miktarCursor.getColumnIndex("urun_miktari"));
+            int miktar = miktarCursor.getInt(miktarCursor.getColumnIndex("urun_miktari"));
             Cursor birimCursor = (Cursor) BirimAdapter.getItem(urun_miktari_birimi.getSelectedItemPosition());
             String birim = turCursor.getString(birimCursor.getColumnIndex("birim"));
-            veriTabani.Urun_Ekle(urun_adi.getText().toString(), Integer.parseInt(Favori_tick.getText().toString()),
+            veriTabani.Favori_Urun_Ekle(urun_adi.getText().toString(), Favori_tick.isChecked(),
                     Integer.parseInt(urun_fiyati.getText().toString()), turAdi, miktar,birim);
             return null;
         }
