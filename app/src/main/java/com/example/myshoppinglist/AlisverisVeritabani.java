@@ -133,7 +133,7 @@ public class AlisverisVeritabani {
         yeniFavoriUrun.put("Miktar", Miktar);
         yeniFavoriUrun.put("Miktar_Birimi", Miktar_Birimi);
         open();
-        veriTabani.update("Favori_Urun",yeniFavoriUrun, "_id=" + id, null);
+        veriTabani.update("Favori",yeniFavoriUrun, "_id=" + id, null);
         close();
     }
 
@@ -159,14 +159,14 @@ public class AlisverisVeritabani {
     }
 
     public Cursor FavoriUrunleriGetir(Long param){
-        return veriTabani.query("Favori_Urun", new String[]  {"_id", "ad","Favori","Fiyat","Türü","Miktar","Miktar_Birimi"}, null, null, "Favori", null, "ad");
+        return veriTabani.query("Favori", new String[]  {"_id", "ad","Favori","Fiyat","Türü","Miktar","Miktar_Birimi"}, null, null, "Favori", null, "ad");
     }
     public Cursor turleriGetir(){
-        return veriTabani.query("tur", new String[] {"_id", "ad"}, null, null, null, null, "ad");
+        return veriTabani.query("Tur", new String[] {"_id", "ad"}, null, null, null, null, "ad");
     }
 
     public Cursor urunmiktarlariniGetir(){
-        return veriTabani.query("miktar", new String[] {"_id", "ad"}, null, null, null, null, "ad");
+        return veriTabani.query("Miktar", new String[] {"_id", "ad"}, null, null, null, null, "ad");
     }
 
     public Cursor ListeleriGetir(){
@@ -174,7 +174,7 @@ public class AlisverisVeritabani {
     }
 
     public Cursor birimleriGetir(){
-        return veriTabani.query("birim", new String[] {"_id", "ad"}, null, null, null, null, "ad");
+        return veriTabani.query("Birim", new String[] {"_id", "ad"}, null, null, null, null, "ad");
     }
 
 
@@ -193,40 +193,27 @@ public class AlisverisVeritabani {
             db.execSQL(sqlListe);
             String sqlUrun = "CREATE TABLE Urun" +
                     "(_id integer primary key autoincrement," +
-                    "ad TEXT,favori BOOLEAN,fiyat double,tur TEXT,"+
+                    "ad TEXT,favori integer DEFAULT '0,1',fiyat REAL,tur TEXT,"+
                     "miktar integer,miktar_birimi TEXT);";
             db.execSQL(sqlUrun);
             String sqlFavoriUrun = "CREATE TABLE Favori" +
                     "(_id integer primary key autoincrement," +
-                    "ad TEXT,favori BOOLEAN,fiyat double,tur TEXT,"+
+                    "ad TEXT,favori integer DEFAULT '0,1',fiyat REAL,tur TEXT,"+
                     "miktar integer,miktar_birimi TEXT);";
             db.execSQL(sqlFavoriUrun);
-
-            CREATE TABLE "Favori" (
-                    "_id"	integer PRIMARY KEY AUTOINCREMENT,
-            "ad"	TEXT,
-                    "favori"	integer DEFAULT '0,1',
-                    "fiyat"	REAL,
-                    "tur"	TEXT,
-                    "miktar"	integer,
-                    "miktar_birimi"	TEXT
-)
             String sqlBirim = "CREATE TABLE Birim" +
                     "(_id	INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "Birim	INTEGER NOT NULL);";
+                    "Birim	TEXT NOT NULL);";
             db.execSQL(sqlBirim);
-)
 
-
-
-            String sqlTur = "CREATE TABLE tur" +
+            String sqlTur = "CREATE TABLE Tur" +
                     "(_id integer primary key autoincrement," +
                     "ad TEXT);";
             db.execSQL(sqlTur);
-            String sqlYonetmen = "CREATE TABLE yonetmen" +
+            String sqlMiktar = "CREATE TABLE Miktar" +
                     "(_id integer primary key autoincrement," +
-                    "ad TEXT, soyad TEXT);";
-            db.execSQL(sqlYonetmen);
+                    "miktar INTEGER);";
+            db.execSQL(sqlMiktar);
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
