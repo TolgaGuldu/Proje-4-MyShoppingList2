@@ -18,7 +18,7 @@ public class Favori_Urun_Ekle extends Fragment {
     private Spinner urun_turu;
     private EditText urun_fiyati;
     private CheckBox Favori_tick;
-    private CursorAdapter UrunAdapter;
+    private CursorAdapter BirimAdapter;
     private CursorAdapter TurAdapter;
     private CursorAdapter MiktarAdapter;
     private Context context;
@@ -38,17 +38,16 @@ public class Favori_Urun_Ekle extends Fragment {
         Button ekle = (Button) listeEkleView.findViewById(R.id.ekle);
         Favori_tick = (CheckBox) listeEkleView.findViewById(R.id.Favori);
         addCheckbox();
-        addListenerOnButton()
         alanListesi = new String[]{"ad"};
         gosterimListesi = new int[]{R.id.ekleTurAd};
-        turAdapter = new SimpleCursorAdapter(this.getActivity(), R.layout.tur_hucre, null, alanListesi, gosterimListesi, 0);
-        tur.setAdapter(turAdapter);
-        new TurleriGetirGorev(context, turAdapter).execute((Object[]) null);
+        TurAdapter = new SimpleCursorAdapter(this.getActivity(), R.layout.tur_hucre, null, alanListesi, gosterimListesi, 0);
+        urun_turu.setAdapter(TurAdapter);
+        new TurleriGetirGorev(context, TurAdapter).execute((Object[]) null);
         alanListesi = new String[]{"urun", "miktarbirimi"};
         gosterimListesi = new int[]{R.id.eklemiktar, R.id.eklemiktarbirimi};
-        miktarAdapter = new SimpleCursorAdapter(this.getActivity(), R.layout.miktar_hucre, null, alanListesi, gosterimListesi, 0);
-        miktar.setAdapter(miktarAdapter);
-        new MiktarlariGetirGorev(context, miktarAdapter).execute((Object[]) null);
+        MiktarAdapter = new SimpleCursorAdapter(this.getActivity(), R.layout.miktar_hucre, null, alanListesi, gosterimListesi, 0);
+        urun_miktari.setAdapter(MiktarAdapter);
+        new MiktarlariGetirGorev(context, MiktarAdapter).execute((Object[]) null);
 
         ekle.setOnClickListener(new OnClickListener() {
 
@@ -59,9 +58,7 @@ public class Favori_Urun_Ekle extends Fragment {
                 StringBuffer result = new StringBuffer();
                 result.append("IPhone check : ").append(Favori_tick.isChecked());
 
-                Toast.makeText(Favori_Urun_Ekle.this, result.toString(),
-                        Toast.LENGTH_LONG).show();
-
+                Toast.makeText(Favori_Urun_Ekle.this, result.toString(),Toast.LENGTH_LONG).show();
             }
         });
         return listeEkleView;
@@ -71,12 +68,14 @@ public class Favori_Urun_Ekle extends Fragment {
         @Override
         protected Object doInBackground(Object... params) {
             AlisverisVeritabani veriTabani = new AlisverisVeritabani(context);
-            Cursor turCursor = (Cursor) turAdapter.getItem(tur.getSelectedItemPosition());
+            Cursor turCursor = (Cursor) TurAdapter.getItem(urun_turu.getSelectedItemPosition());
             String turAdi = turCursor.getString(turCursor.getColumnIndex("ad"));
-            Cursor miktarCursor = (Cursor) miktarAdapter.getItem(miktar.getSelectedItemPosition());
-            String miktar = miktarCursor.getString(miktarCursor.getColumnIndex("urun_miktari")) + " " + miktarCursor.getString(miktarCursor.getColumnIndex("urun_miktari_birimi"));
-            veriTabani.Urun_Ekle(ad.getText().toString(), Integer.parseInt(Favori.getText().toString()),
-                    Integer.parseInt(Fiyat.getText().toString()), turAdi, Integer.parseInt(Miktar.getText().toString()), Miktar_Birimi.getText().toString());
+            Cursor miktarCursor = (Cursor) MiktarAdapter.getItem(urun_miktari.getSelectedItemPosition());
+            String miktar = miktarCursor.getString(miktarCursor.getColumnIndex("urun_miktari"));
+            Cursor birimCursor = (Cursor) BirimAdapter.getItem(urun_turu.getSelectedItemPosition());
+            String birim = turCursor.getString(turCursor.getColumnIndex("birim"));
+            veriTabani.Urun_Ekle(urun_adi.getText().toString(), Integer.parseInt(Favori_tick.getText().toString()),
+                    Integer.parseInt(urun_fiyati.getText().toString()), turAdi, miktar,birim);
             return null;
         }
 

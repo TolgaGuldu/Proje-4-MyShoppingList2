@@ -14,42 +14,19 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 public class Miktar_Birimi extends ListFragment {
-    protected static final String ROW_ID = "row_id";
-    private CursorAdapter miktarAdapter;
-    private Context context;
+        private CursorAdapter BirimAdapter;
+        private Context context;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View filmListesiView = inflater.inflate(R.layout.film_listesi, container, false);
-        context = this.getActivity();
-        String[] alanListesi = new String[] {"ad", "yil"};
-        int[] gosterimListesi = new int[] {R.id.eklemiktarbirimi};
-        miktarAdapter = new SimpleCursorAdapter(this.getActivity(), R.layout.miktar_hucre, null, alanListesi, gosterimListesi, 0);
-        setListAdapter(miktarAdapter);
-        new FilmleriGetirGorev().execute((Object[]) null);
-        return filmListesiView;
-    }
-
-    private class FilmleriGetirGorev extends AsyncTask<Object, Object, Cursor>{
-        FilmVeritabani veriTabani = new FilmVeritabani(context);
-
-        @Override
-        protected Cursor doInBackground(Object... params){
-            veriTabani.open();
-            return veriTabani.filmleriGetir();
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View turListesiView = inflater.inflate(R.layout.miktarbirimi_listesi, container, false);
+            context = this.getActivity();
+            String[] alanListesi = new String[] {"ad"};
+            int[] gosterimListesi = new int[] {R.id.turAdi};
+            BirimAdapter = new SimpleCursorAdapter(this.getActivity(), R.layout.tur_hucre, null, alanListesi, gosterimListesi, 0);
+            setListAdapter(BirimAdapter);
+            new TurleriGetirGorev(context, BirimAdapter).execute((Object[]) null);
+            return turListesiView;
         }
 
-        @Override
-        protected void onPostExecute(Cursor result){
-            filmAdapter.changeCursor(result);
-            veriTabani.close();
-        }
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        Intent filmDegistirSil = new Intent(l.getContext(), FilmDegistirSil.class);
-        filmDegistirSil.putExtra(ROW_ID, id);
-        startActivity(filmDegistirSil);
-    }
+}

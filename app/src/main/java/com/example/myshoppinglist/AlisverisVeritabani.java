@@ -78,11 +78,11 @@ public class AlisverisVeritabani {
         close();
     }
 
-    public void Miktar_Birimi_ekle(String Türü) {
-            ContentValues yeniTür = new ContentValues();
-            yeniTür.put("Türü", Türü);
+    public void Miktar_Birimi_ekle(String Birim) {
+            ContentValues yeniBirim= new ContentValues();
+        yeniBirim.put("Birim", Birim);
             open();
-            veriTabani.insert("Miktar", null, yeniTür);
+            veriTabani.insert("Birim", null, yeniBirim);
             close();
     }
 
@@ -103,6 +103,18 @@ public class AlisverisVeritabani {
     public void Urun_Sil(long id){
         open();
         veriTabani.delete("Urun", "_id=" + id, null);
+        close();
+    }
+
+    public void Miktar_Sil(long id){
+        open();
+        veriTabani.delete("Miktar", "_id=" + id, null);
+        close();
+    }
+
+    public void Miktar_Birimi_Sil(long id){
+        open();
+        veriTabani.delete("Birim", "_id=" + id, null);
         close();
     }
 
@@ -138,11 +150,11 @@ public class AlisverisVeritabani {
     }
 
     public Cursor UrunleriGetir(){
-        return veriTabani.query("Favori_Urun", new String[] {"_id", "ad","Favori","Fiyat","Türü","Miktar","Miktar_Birimi"}, null, null, null, null, "ad");
+        return veriTabani.query("Urun", new String[] {"_id", "ad","Favori","Fiyat","Türü","Miktar","Miktar_Birimi"}, null, null, null, null, "ad");
     }
 
     public Cursor FavoriUrunleriGetir(){
-        return veriTabani.query("Urun", new String[]  {"_id", "ad","Favori","Fiyat","Türü","Miktar","Miktar_Birimi"}, null, null, "Favori", null, "ad");
+        return veriTabani.query("Favori_Urun", new String[]  {"_id", "ad","Favori","Fiyat","Türü","Miktar","Miktar_Birimi"}, null, null, "Favori", null, "ad");
     }
     public Cursor turleriGetir(){
         return veriTabani.query("tur", new String[] {"_id", "ad"}, null, null, null, null, "ad");
@@ -154,6 +166,10 @@ public class AlisverisVeritabani {
 
     public Cursor ListeleriGetir(){
         return veriTabani.query("Liste", new String[] {"_id", "ad"}, null, null, null, null, "ad");
+    }
+
+    public Cursor birimleriGetir(){
+        return veriTabani.query("birim", new String[] {"_id", "ad"}, null, null, null, null, "ad");
     }
 
 
