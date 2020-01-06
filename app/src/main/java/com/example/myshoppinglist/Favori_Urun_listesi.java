@@ -23,21 +23,26 @@ public class Favori_Urun_listesi extends ListFragment {
                              Bundle savedInstanceState) {
         View favoriListesiView = inflater.inflate(R.layout.activity_favori_urun_listesi, container, false);
         context = this.getActivity();
-        String[] alanListesi = new String[]{"ad", "yil"};
+        String[] alanListesi = new String[]{"ad"};
         int[] gosterimListesi = new int[]{R.id.ad, R.id.eklefiyat};
         FavoriUrunAdapter = new SimpleCursorAdapter(this.getActivity(), R.layout.favori_hucre, null, alanListesi, gosterimListesi, 0);
         setListAdapter(FavoriUrunAdapter);
-        new FilmleriGetirGorev().execute((Object[]) null);
+        new FavorileriGetirGorev().execute((Object[]) null);
         return favoriListesiView;
     }
 
-    private class FilmleriGetirGorev extends AsyncTask<Object, Object, Cursor> {
+    private class FavorileriGetirGorev extends AsyncTask<Object, Object, Cursor> {
         AlisverisVeritabani veriTabani = new AlisverisVeritabani(context);
 
-        @Override
-        protected Cursor doInBackground(Object... params) {
+
+        protected Cursor doInBackground(Long... params) {
             veriTabani.open();
-            return veriTabani.FavoriUrunleriGetir();
+            return veriTabani.FavoriUrunleriGetir(params[0]);
+        }
+
+        @Override
+        protected Cursor doInBackground(Object... objects) {
+            return null;
         }
 
         @Override

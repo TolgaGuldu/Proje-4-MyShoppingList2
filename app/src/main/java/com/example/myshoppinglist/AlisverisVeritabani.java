@@ -100,6 +100,12 @@ public class AlisverisVeritabani {
         close();
     }
 
+    public void Favori_Sil(long id){
+        open();
+        veriTabani.delete("Favori", "_id=" + id, null);
+        close();
+    }
+
     public void Urun_Sil(long id){
         open();
         veriTabani.delete("Urun", "_id=" + id, null);
@@ -153,7 +159,7 @@ public class AlisverisVeritabani {
         return veriTabani.query("Urun", new String[] {"_id", "ad","Favori","Fiyat","Türü","Miktar","Miktar_Birimi"}, null, null, null, null, "ad");
     }
 
-    public Cursor FavoriUrunleriGetir(){
+    public Cursor FavoriUrunleriGetir(Long param){
         return veriTabani.query("Favori_Urun", new String[]  {"_id", "ad","Favori","Fiyat","Türü","Miktar","Miktar_Birimi"}, null, null, "Favori", null, "ad");
     }
     public Cursor turleriGetir(){
